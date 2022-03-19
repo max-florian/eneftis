@@ -6,7 +6,8 @@ const deploy = async () => {
     const Enefti = await ethers.getContractFactory("Enefti");
 
     // El deploy funciona como el constructor del contrato
-    const deployed = await Enefti.deploy();
+    // Aquí se define el limite de NFTs que se podrán generar. En este caso 10,000
+    const deployed = await Enefti.deploy(10000);
 
     console.log("Enefti is deployed at: ", deployed.address);
 };

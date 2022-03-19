@@ -5,18 +5,23 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "./Base64.sol";
 
-
-contract Enefti is ERC721 {
+// El contrato extiende del formato ERC721 Y ERC721Enumerable
+contract Enefti is ERC721, ERC721Enumerable {
     
     using Counters for Counters.Counter;
+
+    // Para todos los enteros256 se utilizará la librería Strings y hará un override de su funcionalidad.
+    using Strings for uint256;
 
     // Contador de tipo Counter
     Counters.Counter private _idCounter;
     uint256 public maxSupply;
 
     constructor(uint256 _maxSupply) ERC721("Enefti", "ENFT") {
+        // Se le settea un máximo de NFTs posiblemente generados.
         maxSupply = _maxSupply;
     }
 
@@ -30,9 +35,14 @@ contract Enefti is ERC721 {
 
     // Función que se usa para indicar de donde vienen los nfts (nft base)
     function _baseURI() internal pure override returns(string memory){
-        return "https://link base de donde sacamos las imgs de los NFTS";
+        // Link base de donde vienen los NFTs
+        return "https://objectstorage.us-ashburn-1.oraclecloud.com/n/id3iojeonfyu/b/eneftis/o/";
     }
 
+    /**
+        Se crea una imagen a partir del link base donde se encuentran almacenados los NFTs
+        y un ID que se genera automaticamente (por el momento).
+     */
     function imageByURL(string memory imageid) public pure returns(string memory) {
         string memory baseURI = _baseURI();
         string memory id = imageid;
@@ -40,7 +50,7 @@ contract Enefti is ERC721 {
         return string(abi.encodePacked(baseURI,id));
     }
 
-    // Función que devuelve el string del json del NFT
+    // Función que devuelve el string del json del NFT (TokenURI)
     function tokenURI (uint256 tokenId) 
         public 
         view 
@@ -52,12 +62,12 @@ contract Enefti is ERC721 {
             "ERC721 Metadata: URI query for nonexistent token"
         );
 
-        string memory image = imageByURL(string(abi.encodePacked("inicio del nombre del NFT",tokenId)));
+        string memory image = imageByURL(tokenId.toString());
 
         string memory jsonURI = Base64.encode(
             abi.encodePacked(
                 '{ "name": "Enefti #',
-                tokenId,
+                tokenId.toString(),
                 '", "description": "Eneftis are randomized Avatars stored on chain to try developing a DApp", "image": "',
                 image,
                 '"}'
@@ -67,19 +77,21 @@ contract Enefti is ERC721 {
         return string(abi.encodePacked("data:application/json;base64,", jsonURI));
     }
 
+
+    // Funciones por defecto del standard ERC721 proporcionadas por OpenZeppelin
     // Override required
     function _beforeTokenTransfer(
         address from,
         address to,
         uint256 tokenId
-    ) internal override(ERC721/**, ERC721Enumerable*/) {
+    ) internal override(ERC721, ERC721Enumerable) {
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721/**, ERC721Enumerable*/)
+        override(ERC721, ERC721Enumerable)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
