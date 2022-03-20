@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import Home from "./views/Home";
+import MainLayout from "./layouts/main"
 
 
 function App() {
-  useEffect(() => {
-    if(window.ethereum){
-      window.ethereum.request({
-        method: "eth_requestAccounts",
-      }).then(accounts => console.log(accounts));
-    }
-  }, [])
   return (
-    <Routes>
-      <Route path="/" exact element={<Home/>} />
-    </Routes>
+    <MainLayout>
+      <Routes>
+        <Route path="/" exact element={<Home/>} />
+      </Routes>
+    </MainLayout>
   );
 }
 

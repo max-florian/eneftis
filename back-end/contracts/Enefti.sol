@@ -18,17 +18,17 @@ contract Enefti is ERC721, ERC721Enumerable {
 
     // Contador de tipo Counter
     Counters.Counter private _idCounter;
-    uint256 public maxSupply;
+    //uint256 public maxSupply;
 
-    constructor(uint256 _maxSupply) ERC721("Enefti", "ENFT") {
+    constructor() ERC721("Enefti", "ENFT") {
         // Se le settea un máximo de NFTs posiblemente generados.
-        maxSupply = _maxSupply;
+        //maxSupply = _maxSupply;
     }
 
     function mint() public {
         // Limitar el supply total de eneftis dentro del contrato.
         uint256 current = _idCounter.current();
-        require(current < maxSupply, "No Eneftis left xdn't");
+        //require(current < maxSupply, "No Eneftis left xdn't");
         _safeMint(msg.sender, current);
         _idCounter.increment();
     }
@@ -47,7 +47,7 @@ contract Enefti is ERC721, ERC721Enumerable {
         string memory baseURI = _baseURI();
         string memory id = imageid;
 
-        return string(abi.encodePacked(baseURI,id));
+        return string(abi.encodePacked(baseURI,id,".png"));
     }
 
     // Función que devuelve el string del json del NFT (TokenURI)
