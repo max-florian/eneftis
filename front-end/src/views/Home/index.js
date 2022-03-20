@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   Badge,
+  useToast
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useWeb3React } from '@web3-react/core';
@@ -14,24 +15,66 @@ import useEneftis from '../../hooks/useEneftis';
 
 
 function Home() {
+  const [ isMinting, setIsMinting ] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
   const [currentEneftis, setCurrentEneftis] = useState("");
+
+  const toast = useToast();
+
   const { active, account } = useWeb3React();
   const eneftis = useEneftis();
 
   const getEneftisData = useCallback(async () => {
     if (eneftis) {
       // Se llama a las funciones del contrato
+      /**
+       * El método 'totalSupply' es parte del standard ERC721 y retorna la cantidad de tokens almacenados por el contrato
+       */
       const totalSupply = await eneftis.methods.totalSupply().call(); // Id actual autogenerado en el contrato.
       const image = await eneftis.methods.imageByURL(totalSupply).call(); 
       setCurrentEneftis(totalSupply);
       setImageSrc(image);
     }
-  }, [eneftis, account]);
+  }, [eneftis]);
 
   useEffect(() => {
     getEneftisData();
   }, [getEneftisData]);
+
+  // Logica de creacion del NFT
+  const mint = () => {
+    // Al hacer una transaccion con un fee asociado se usa "send"
+    setIsMinting(true);
+    eneftis.methods
+    .mint()
+    .send({
+      from: account,
+      //value: 1e18 //Si se quisiera cobrar por el mint
+    }).on("transactionHash", (txHash) => {
+      toast({
+        title: "Transaction sended!",
+        description: txHash,
+        status: "info"
+      })
+    })
+    .on("receipt", () => {
+      setIsMinting(false);
+      toast({
+        title: "Transaction confirmed!",
+        description: "Congratulations!",
+        status: "success"
+      })
+    })
+    .on("error", (error) => {
+      setIsMinting(false);
+      toast({
+        title: "Transaction failed!",
+        description: error.message,
+        status: "error"
+      })
+    });
+
+  }
 
   // const [maxSupply, setMaxSupply] = useState();
 
@@ -103,10 +146,12 @@ function Home() {
               bg={"green.400"}
               _hover={{ bg: "green.500" }}
               disabled={!eneftis}
+              onClick={mint}
+              isLoading={isMinting}
             >
-              Obtén tu punk
+              Obtén tu enefti
             </Button>
-            <Link to="/punks">
+            <Link to="/myeneftis">
               <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
                 Galería
               </Button>
