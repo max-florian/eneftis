@@ -6,9 +6,11 @@ import {
   Button,
   Image,
   Badge,
-  useToast
+  useToast,
+  useColorModeValue,
+  useColorMode
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useWeb3React } from '@web3-react/core';
 import React, { useState, useCallback, useEffect } from 'react';
 import useEneftis from '../../hooks/useEneftis';
@@ -20,6 +22,9 @@ function Home() {
   const [currentEneftis, setCurrentEneftis] = useState("");
 
   const toast = useToast();
+  const navigate = useNavigate();
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const { active, account } = useWeb3React();
   const eneftis = useEneftis();
@@ -95,6 +100,7 @@ function Home() {
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}
         direction={{ base: "column-reverse", md: "row" }}
+        bg={useColorModeValue("white", "gray.800")}
       >
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
           <Heading
@@ -112,26 +118,26 @@ function Home() {
                 position: "absolute",
                 bottom: 1,
                 left: 0,
-                bg: "green.400",
+                bg: "blue.400",
                 zIndex: -1,
               }}
             >
-              Un Platzi Punk
+              Eneftis
             </Text>
             <br />
-            <Text as={"span"} color={"green.400"}>
-              nunca para de aprender
+            <Text as={"span"} color={"blue.400"}>
+              Tu introducción al mundo de los NFTs a un precio accesible
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Platzi Punks es una colección de Avatares randomizados cuya metadata
-            es almacenada on-chain. Poseen características únicas y sólo hay 10000
-            en existencia.
+            Eneftis es una colección de "dibujos" realizados por mi por lo que son únicos e irrepetibles.
+            Está de más decir que dada mi poca habilidad para dibujar te aseguras al 100% que no están generados por
+            computadora. El fin de este proyecto es acercar al usuario al mundo de los NFTs sin afectar en lo absoluto a su economía.
           </Text>
-          <Text color={"green.500"}>
-            Cada Platzi Punk se genera de forma secuencial basado en tu address,
-            usa el previsualizador para averiguar cuál sería tu Platzi Punk si
-            minteas en este momento
+          <Text color={"blue.500"}>
+            Los Eneftis salen al mercado de forma secuencial por lo que el Enefti que se muestra en la previsualización es 
+            el que se encuentra actualmente disponible a la venta y unicamente este se podrá comprar. Luego de que este
+            sea minteado por su nuevo dueño saldrá otro a la venta que cualquier usuario podrá adquirir.
           </Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}
@@ -142,20 +148,27 @@ function Home() {
               size={"lg"}
               fontWeight={"normal"}
               px={6}
-              colorScheme={"green"}
-              bg={"green.400"}
-              _hover={{ bg: "green.500" }}
+              colorScheme={"blue"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
               disabled={!eneftis}
               onClick={mint}
               isLoading={isMinting}
             >
-              Obtén tu enefti
+              Obtén tu Enefti
             </Button>
-            <Link to="/myeneftis">
-              <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
-                Galería
-              </Button>
-            </Link>
+            <Button 
+              rounded={"full"} 
+              size={"lg"} 
+              fontWeight={"normal"} 
+              px={6}
+              onClick={()=>{navigate("/myeneftis")}}
+            >
+              Galería
+            </Button>
+            <Button onClick={toggleColorMode}>
+              Toggle {colorMode === 'Dark' ? 'Light' : 'Dark'}
+            </Button>
           </Stack>
         </Stack>
         <Flex
@@ -166,25 +179,30 @@ function Home() {
           position={"relative"}
           w={"full"}
         >
-          <Image src={active ? imageSrc : "https://avataaars.io/"} />
+          <Image 
+            src={active ? imageSrc : "https://avataaars.io/"} 
+            width={"450"}
+            height={"450"}  
+            marginBottom="5"
+          />
           {active ? (
             <>
               <Flex mt={2}>
                 <Badge>
                   Next ID:
-                  <Badge ml={1} colorScheme="green">
+                  <Badge ml={1} colorScheme="blue">
                     1
                   </Badge>
                 </Badge>
                 <Badge ml={2}>
                   Address:
-                  <Badge ml={1} colorScheme="green">
+                  <Badge ml={1} colorScheme="blue">
                     0x0000...0000
                   </Badge>
                 </Badge>
               </Flex>
               <Text 
-                color={"green.600"}
+                color={"blue.600"}
                 mt={4}
                 >
                 Eneftis minteados : {currentEneftis}
@@ -193,7 +211,7 @@ function Home() {
                 onClick={getEneftisData}
                 mt={4}
                 size="xs"
-                colorScheme="green"
+                colorScheme="blue"
               >
                 Actualizar
               </Button>

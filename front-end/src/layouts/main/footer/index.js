@@ -11,12 +11,12 @@ const Footer = () => {
   return (
     <Box
       bg={useColorModeValue("white", "gray.800")}
-      color={useColorModeValue("gray.700", "gray.200")}
+      color={"gray.100"}
     >
       <Box
         borderTopWidth={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.700")}
+        bgGradient='linear(to-l, #7928CA, #FF0080)'
       >
         <Container
           as={Stack}
@@ -28,9 +28,9 @@ const Footer = () => {
           align={{ base: "center", md: "center" }}
         >
           <Text>
-            © {new Date().getFullYear()} Original designs by
-            <Link ml={1} href="https://twitter.com/pablostanley">
-              Pablo Stanley 🎨
+            Copyright © {new Date().getFullYear()} , Diseños creados por 
+            <Link ml={1} href="https://www.twitch.tv/k7droid">
+              Max Florian
             </Link>
           </Text>
         </Container>

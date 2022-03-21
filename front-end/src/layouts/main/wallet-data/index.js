@@ -55,7 +55,7 @@ const WalletData = () => {
   return (
     <Flex alignItems={"center"}>
       {active ? (
-        <Tag colorScheme="green" borderRadius="full">
+        <Tag colorScheme="blue" borderRadius="full">
           <TagLabel>
             <Link to={`/myeneftis?address=${account}`}>{truncatedAddress}</Link>
           </TagLabel>
@@ -75,7 +75,7 @@ const WalletData = () => {
       ) : (
         <Button
           variant={"solid"}
-          colorScheme={"green"}
+          colorScheme={"blue"}
           size={"sm"}
           leftIcon={<AddIcon />}
           onClick={connect}

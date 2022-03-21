@@ -89,7 +89,7 @@ import useEneftis from "../../hooks/useEneftis";
           />
           <Button 
           disabled={account !== nefti.owner} 
-          colorScheme="green"
+          colorScheme="blue"
           onClick={transfer}
           isLoading={transfering}
           >
@@ -101,7 +101,7 @@ import useEneftis from "../../hooks/useEneftis";
           <Text fontSize="xl">{nefti.description}</Text>
           <Text fontWeight={600}>
             Owner:
-            <Tag ml={2} colorScheme="green">
+            <Tag ml={2} colorScheme="blue">
               {nefti.owner}
             </Tag>
           </Text>

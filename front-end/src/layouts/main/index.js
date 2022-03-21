@@ -20,7 +20,7 @@ const Links = [
     to: "/",
   },
   {
-    name: "My Eneftis",
+    name: "Mis Eneftis",
     to: "/myeneftis",
   },
 ];
@@ -38,8 +38,8 @@ const MainLayout = ({ children }) => {
         px={4}
       >
         <Flex
-          bg={useColorModeValue("white", "gray.800")}
-          color={useColorModeValue("gray.600", "white")}
+          bgGradient='linear(to-l, #7928CA, #FF0080)'
+          color={"gray.100"}
           minH={"60px"}
           py={{ base: 2 }}
           px={{ base: 4 }}
@@ -59,7 +59,7 @@ const MainLayout = ({ children }) => {
           <HStack spacing={8} alignItems={"center"}>
             <Flex alignItems="center">
               <Image src="./images/platzi.svg" width="80px" />
-              <Heading size="md" color="purple" mt={0.2} ml={1}>
+              <Heading size="md" color="blue" mt={0.2} ml={1}>
                 Punks
               </Heading>
             </Flex>
