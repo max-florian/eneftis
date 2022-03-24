@@ -35,7 +35,7 @@ const MainLayout = ({ children }) => {
         maxW={"7xl"}
         width="100%"
         bg={useColorModeValue("white", "gray.800")}
-        px={4}
+        px={0}
       >
         <Flex
           bgGradient='linear(to-l, #7928CA, #FF0080)'
@@ -44,7 +44,7 @@ const MainLayout = ({ children }) => {
           py={{ base: 2 }}
           px={{ base: 4 }}
           borderBottom={1}
-          borderStyle={"solid"}
+          borderStyle={"none"}
           borderColor={useColorModeValue("gray.200", "gray.900")}
           alignItems={"center"}
           justifyContent={"space-between"}
