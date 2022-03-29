@@ -1,6 +1,8 @@
 import {
   Stack,
   VStack,
+  Box,
+  Spacer,
   Flex,
   Heading,
   Text,
@@ -105,21 +107,18 @@ function Home() {
 
     return (
       <VStack>
-        <Stack
-          align={"center"}
-          direction={['column', 'row']}
+        <Flex
+          direction={"row"}
+          w={"full"}
         >
-          <Text 
-            as={"span"}
-            fontSize='2xl'
-          >
-            Mode 
-          </Text>
-          <Switch
-                  isOn={lightMode}
-                  handleToggle={enableLightMode}
-          />
-        </Stack>
+          <Spacer />
+          <Box >
+            <Switch
+                    isOn={lightMode}
+                    handleToggle={enableLightMode}
+            />
+          </Box>
+        </Flex>
         <Stack
           align={"center"}
           spacing={{ base: 8, md: 10 }}
