@@ -19,6 +19,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import useEneftis from '../../hooks/useEneftis';
 import Switch from "../../components/switch";
 
+import defaultimg from "../../assets/images/defaultimg.png"
+
 
 function Home() {
   const [ isMinting, setIsMinting ] = useState(false);
@@ -28,7 +30,7 @@ function Home() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [lightMode, setLightMode] = useState(false);
+  const [lightMode, setLightMode] = useState(true);
   const { colorMode, toggleColorMode } = useColorMode();
 
   const enableLightMode = () => {
@@ -159,14 +161,14 @@ function Home() {
               </Text>
             </Heading>
             <Text color={"gray.500"}>
-              Eneftis es una colección de "dibujos" realizados por mi por lo que son únicos e irrepetibles.
-              Está de más decir que dada mi poca habilidad para dibujar te aseguras al 100% que no están generados por
+              Eneftis es una colección de "dibujos" realizados por mí.
+              Está de más decir que dada mi poca habilidad para dibujar te aseguras al 100% que son únicos y no están generados por
               computadora. El fin de este proyecto es acercar al usuario al mundo de los NFTs sin afectar en lo absoluto a su economía.
             </Text>
             <Text color={"blue.500"}>
               Los Eneftis salen al mercado de forma secuencial por lo que el Enefti que se muestra en la previsualización es 
               el que se encuentra actualmente disponible a la venta y unicamente este se podrá comprar. Luego de que este
-              sea minteado por su nuevo dueño saldrá otro a la venta que cualquier usuario podrá adquirir.
+              sea minteado por su nuevo dueño, saldrá otro a la venta que cualquier usuario podrá adquirir.
             </Text>
             <Stack
               spacing={{ base: 4, sm: 6 }}
@@ -207,7 +209,7 @@ function Home() {
             w={"full"}
           >
             <Image 
-              src={active ? imageSrc : "https://avataaars.io/"} 
+              src={active ? imageSrc : defaultimg} 
               htmlWidth="75%"
               htmlHeight="75%"  
               marginBottom="5"

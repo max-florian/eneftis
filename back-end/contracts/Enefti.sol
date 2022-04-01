@@ -68,7 +68,7 @@ contract Enefti is ERC721, ERC721Enumerable {
             abi.encodePacked(
                 '{ "name": "Enefti #',
                 tokenId.toString(),
-                '", "description": "Eneftis are randomized Avatars stored on chain to try developing a DApp", "image": "',
+                '", "description": "Eneftis are original and unrepeatable drawings made by Max Florian", "image": "',
                 image,
                 '"}'
             )

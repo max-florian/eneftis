@@ -3,7 +3,7 @@
 const EneftisArtifact = {
     // Indica dependiendo de la red en la que estamos la dir del contrato inteligente
     address: {
-        4: "0x60e43C5147177Cc2e11Deb6775C748Dffa616286",
+        4: "0xc79fae165b4834eae0771fc511d1303c248d81a8",
     },
     abi: [
         {
