@@ -30,7 +30,7 @@ const Footer = () => {
           <Text>
             Copyright © {new Date().getFullYear()} , Diseños creados por 
             <Link ml={1} href="https://www.twitch.tv/k7droid">
-              Max Florian
+              Max Florian 🎨
             </Link>
           </Text>
         </Container>

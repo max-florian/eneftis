@@ -11,13 +11,15 @@ import {
   Badge,
   useToast,
   useColorModeValue,
-  useColorMode
+  useColorMode,
+  useDisclosure
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useWeb3React } from '@web3-react/core';
 import React, { useState, useCallback, useEffect } from 'react';
 import useEneftis from '../../hooks/useEneftis';
 import Switch from "../../components/switch";
+import IntroModal from "../../components/intromodal";
 
 import defaultimg from "../../assets/images/defaultimg.png"
 
@@ -31,13 +33,15 @@ function Home() {
   const navigate = useNavigate();
 
   const [lightMode, setLightMode] = useState(true);
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
+
+  const {onClose, isOpen} = useDisclosure({defaultIsOpen: true});
 
   const enableLightMode = () => {
     setLightMode(!lightMode)
     
     toggleColorMode();
-  }
+  };
 
   const { active, account } = useWeb3React();
   const eneftis = useEneftis();
@@ -109,6 +113,7 @@ function Home() {
 
     return (
       <VStack>
+        <IntroModal isOpen={isOpen} onClose={onClose}/>
         <Flex
           direction={"row"}
           w={"full"}

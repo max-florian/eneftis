@@ -24,6 +24,10 @@ const Links = [
     name: "Mis Eneftis",
     to: "/myeneftis",
   },
+  {
+    name: "Crear una Wallet de Prueba",
+    to: "/createwallet",
+  },
 ];
 
 const MainLayout = ({ children }) => {
