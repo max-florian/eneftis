@@ -60,6 +60,8 @@ const MainLayout = ({ children }) => {
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
+            variant='outline'
+            colorScheme='blue'
           />
           <HStack spacing={8} alignItems={"center"}>
             <Flex alignItems="center">

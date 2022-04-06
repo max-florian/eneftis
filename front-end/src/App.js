@@ -12,14 +12,8 @@ function App() {
     <MainLayout>
       <Routes>
         <Route path="/" exact element={<Home/>} />
-      </Routes>
-      <Routes>
         <Route path="/myeneftis" exact element={<Eneftis/>} />
-      </Routes>
-      <Routes>
         <Route path="/myeneftis/:tokenId" exact element={<Enefti/>} />
-      </Routes>
-      <Routes>
         <Route path="/createwallet" exact element={<CreateWallet/>} />
       </Routes>
     </MainLayout>

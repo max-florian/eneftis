@@ -10,8 +10,11 @@ import {
 const Footer = () => {
   return (
     <Box
+      
+      width={"100%"}
       bg={useColorModeValue("white", "gray.800")}
       color={"gray.100"}
+      
     >
       <Box
         borderTopWidth={1}

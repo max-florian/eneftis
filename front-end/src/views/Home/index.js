@@ -32,7 +32,7 @@ function Home() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [lightMode, setLightMode] = useState(true);
+  const [lightMode, setLightMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
   const {onClose, isOpen} = useDisclosure({defaultIsOpen: true});
